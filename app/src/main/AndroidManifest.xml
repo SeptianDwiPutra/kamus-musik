@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="septiandp.kamusistilahmusik">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".IstilahMusik"
+            android:label="Istilah Musik"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".IstilahNamaMusik"
+            android:label="Istilah Nama Musik"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".KataMusik"
+            android:label="Istilah Kata Musik"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".SaranBacaanMusik"
+            android:label="Saran Bacaan Musik"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Favorite"
+            android:label="Favorite"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:label="Tentang Aplikasi"
+            android:name=".TentangAplikasi"
+            android:parentActivityName=".MainActivity">
+
+        </activity>
+    </application>
+
+</manifest>

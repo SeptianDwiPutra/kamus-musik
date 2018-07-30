@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Kamus Istilah Musik</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Septian Dwi Putra Kamus</string>
+    <string name="nav_header_subtitle">Enjoy And Have Fun Sob..</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="TabelMusik">
+    create table TabelMusik(id integer primary key autoincrement,
+                            kata varchar(50),
+                            deskripsi text,
+                            favorit varchar(6));
+    </string>
+
+    <string name="TabelSaranBacaan">
+    create table TabelSaranBacaan(id integer primary key autoincrement,
+                            judul_buku varchar(50),
+                            penulis text);
+    </string>
+
+    <string name="HapusSemuaTabel">
+        drop table if exists TabelMusik;
+        drop table if exists TabelSaranBacaan;
+    </string>
+</resources>
+
+
