@@ -7,13 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import manajemendb.ManajemenDB;
 import septiandp.kamusistilahmusik.R;
 
-public class AdapterMusik extends RecyclerView.Adapter<ViewHolderMusik>
+public class AdapterMusik extends RecyclerView.Adapter<AdapterMusik.ViewHolderMusik>
 implements Filterable {
 
     // data yang akan dimasukkan ke RecyclerView
@@ -83,5 +85,39 @@ implements Filterable {
         }
 
         return filter;
+    }
+
+    class ViewHolderMusik extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
+
+        public TextView txNama;
+        public TextView txDeskripsi;
+        public ImageButton btnFav;
+
+        public OnFavClickListener onFavClickListener;
+        public boolean bintangNyala = false;
+
+        public ViewHolderMusik(View itemView) {
+            super(itemView);
+
+            txNama = (TextView) itemView.findViewById(R.id.txNama);
+            txDeskripsi = (TextView) itemView.findViewById(R.id.txDeskripsi);
+            btnFav = (ImageButton) itemView.findViewById(R.id.btnFav);
+
+            btnFav.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view.getId() == R.id.btnFav) {
+                bintangNyala = !bintangNyala;
+
+                int id = (bintangNyala) ? android.R.drawable.star_big_on :
+                        android.R.drawable.star_big_off;
+                btnFav.setImageResource(id);
+
+                onFavClickListener.onFavClick(bintangNyala, txNama.getText().toString(), view);
+            }
+        }
     }
 }
