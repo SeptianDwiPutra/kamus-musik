@@ -1,6 +1,8 @@
 package manajemenlist;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,15 +110,33 @@ implements Filterable {
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
             if(view.getId() == R.id.btnFav) {
-                bintangNyala = !bintangNyala;
+                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog.setMessage("Apakah anda yakin ?");
+                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        bintangNyala = !bintangNyala;
 
-                int id = (bintangNyala) ? android.R.drawable.star_big_on :
-                        android.R.drawable.star_big_off;
-                btnFav.setImageResource(id);
+                        int id = (bintangNyala) ? android.R.drawable.star_big_on :
+                                android.R.drawable.star_big_off;
+                        btnFav.setImageResource(id);
 
-                onFavClickListener.onFavClick(bintangNyala, txNama.getText().toString(), view);
+                        onFavClickListener.onFavClick(bintangNyala,
+                                txNama.getText().toString(),
+                                view);
+                    }
+                });
+
+                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                dialog.show();
             }
         }
     }

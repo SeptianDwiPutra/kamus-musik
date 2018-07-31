@@ -5,10 +5,21 @@ public class Musik {
     private String deskripsi;
     private boolean favorit;
 
-    public Musik(String kata, String deskripsi, boolean favorit) {
+    private String namaMenu;
+
+    public Musik(String kata, String deskripsi, String namaMenu, boolean favorit) {
         this.kata = kata;
         this.deskripsi = deskripsi;
         this.favorit = favorit;
+        this.namaMenu = namaMenu;
+    }
+
+    public String getNamaMenu() {
+        return namaMenu;
+    }
+
+    public void setNamaMenu(String namaMenu) {
+        this.namaMenu = namaMenu;
     }
 
     public String getKata() {

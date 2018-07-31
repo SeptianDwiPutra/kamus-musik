@@ -61,11 +61,16 @@ public class IstilahNamaMusik extends AppCompatActivity
         ArrayList<Musik> dataMusik = new ArrayList<>();
 
         for (int i = 0; i < data.size(); i++) {
-            boolean favorit = data.get(i).dapatkanData(3).equals("true");
-            Musik musik = new Musik(data.get(i).dapatkanData(1),
-                    data.get(i).dapatkanData(2), favorit);
+            if(data.get(i).dapatkanData(3).equals("nama_musik")) {
+                boolean favorit = data.get(i).dapatkanData(4).equals("true");
+                Musik musik = new Musik(
+                        data.get(i).dapatkanData(1),
+                        data.get(i).dapatkanData(2),
+                        data.get(i).dapatkanData(3),
+                        favorit);
 
-            dataMusik.add(musik);
+                dataMusik.add(musik);
+            }
         }
 
         return dataMusik;
@@ -89,34 +94,23 @@ public class IstilahNamaMusik extends AppCompatActivity
                 db.dapatkanData(ManajemenDB.TABEL_MUSIK, "kata", kata);
         String kataDariDB = data.dapatkanData(1);
         String deskripsiDariDB = data.dapatkanData(2);
+        String namaMenuDariDB = data.dapatkanData(3);
 
         if(bintangNyala) {
             db.update(ManajemenDB.TABEL_MUSIK, "kata", kata,
-                    kataDariDB, deskripsiDariDB, "true");
+                    kataDariDB, deskripsiDariDB, namaMenuDariDB, "true");
             data = db.dapatkanData(ManajemenDB.TABEL_MUSIK, "kata", kata);
 
             Snackbar.make(view, kata + " masuk favorit!", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
-
-            System.out.println("\n");
-            System.out.println(kata + " MASUK KE FAVORIT");
-            System.out.println("KATA " + kataDariDB);
-            System.out.println("DESKRIPSI " + deskripsiDariDB);
-            System.out.println("FAVORIT " + data.dapatkanData(3));
         }
         else {
             db.update(ManajemenDB.TABEL_MUSIK, "kata", kata,
-                    kataDariDB, deskripsiDariDB, "false");
+                    kataDariDB, deskripsiDariDB, namaMenuDariDB, "false");
             data = db.dapatkanData(ManajemenDB.TABEL_MUSIK, "kata", kata);
 
             Snackbar.make(view, kata + " keluar dari favorit!", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
-
-            System.out.println("\n");
-            System.out.println(kata + " KELUAR DARI FAVORIT");
-            System.out.println("KATA " + kataDariDB);
-            System.out.println("DESKRIPSI " + deskripsiDariDB);
-            System.out.println("FAVORIT " + data.dapatkanData(3));
         }
 
         adapter.setData(isiData());
@@ -132,9 +126,11 @@ public class IstilahNamaMusik extends AppCompatActivity
                     db.dapatkanData(ManajemenDB.TABEL_MUSIK,
                             "kata", adapter.getData().get(ind).getKata());
 
-            boolean fav = dataDariDB.dapatkanData(3).equals("true");
-            dataMusik.add(new Musik(dataDariDB.dapatkanData(1),
+            boolean fav = dataDariDB.dapatkanData(4).equals("true");
+            dataMusik.add(new Musik(
+                    dataDariDB.dapatkanData(1),
                     dataDariDB.dapatkanData(2),
+                    dataDariDB.dapatkanData(3),
                     fav));
         }
 

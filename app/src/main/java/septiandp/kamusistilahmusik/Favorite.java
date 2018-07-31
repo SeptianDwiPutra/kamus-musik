@@ -61,11 +61,14 @@ public class Favorite extends AppCompatActivity
         ArrayList<Musik> dataMusik = new ArrayList<>();
 
         for (int i = 0; i < data.size(); i++) {
-            boolean favorit = data.get(i).dapatkanData(3).equals("true");
+            boolean favorit = data.get(i).dapatkanData(4).equals("true");
 
             if(favorit) {
-                Musik musik = new Musik(data.get(i).dapatkanData(1),
-                        data.get(i).dapatkanData(2), favorit);
+                Musik musik = new Musik(
+                        data.get(i).dapatkanData(1),
+                        data.get(i).dapatkanData(2),
+                        data.get(i).dapatkanData(3),
+                        favorit);
 
                 dataMusik.add(musik);
             }
@@ -92,9 +95,10 @@ public class Favorite extends AppCompatActivity
                 db.dapatkanData(ManajemenDB.TABEL_MUSIK, "kata", kata);
         String kataDariDB = data.dapatkanData(1);
         String deskripsiDariDB = data.dapatkanData(2);
+        String namaMenuDariDB = data.dapatkanData(3);
 
         db.update(ManajemenDB.TABEL_MUSIK, "kata", kata,
-                kataDariDB, deskripsiDariDB, "false");
+                kataDariDB, deskripsiDariDB, namaMenuDariDB, "false");
 
         adapter.setData(isiData());
         adapter.notifyDataSetChanged();
@@ -113,9 +117,11 @@ public class Favorite extends AppCompatActivity
                     db.dapatkanData(ManajemenDB.TABEL_MUSIK,
                             "kata", adapter.getData().get(ind).getKata());
 
-            boolean fav = dataDariDB.dapatkanData(3).equals("true");
-            dataMusik.add(new Musik(dataDariDB.dapatkanData(1),
+            boolean fav = dataDariDB.dapatkanData(4).equals("true");
+            dataMusik.add(new Musik(
+                    dataDariDB.dapatkanData(1),
                     dataDariDB.dapatkanData(2),
+                    dataDariDB.dapatkanData(3),
                     fav));
         }
 
